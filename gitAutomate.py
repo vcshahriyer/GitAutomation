@@ -11,13 +11,23 @@ def sync(remote):
     git.pull(remote)
 
 
-def newBranchPush(remote):
+def newBranchPushPR(remote):
     branch = input("\nType the branch name you want to create: ")
     userName, repoName = git.gitRemoteInfo()
     url = f'https://github.com/{userName}/{repoName}/pull/new/{branch}'
     git.add()
     git.commit()
     git.branch(branch)
+    git.push(remote, branch)
+    webbrowser.get('chrome').open(url)
+
+
+def normalPushPR(remote):
+    branch = git.getActiveBranchName()
+    userName, repoName = git.gitRemoteInfo()
+    url = f'https://github.com/{userName}/{repoName}/pull/new/{branch}'
+    git.add()
+    git.commit()
     git.push(remote, branch)
     webbrowser.get('chrome').open(url)
 

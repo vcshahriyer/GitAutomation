@@ -5,7 +5,8 @@ import git
 import gitAutomate as automate
 
 # automate.newBranchPush("origin")
-automate.normalPush("origin")
+automate.normalPushPR("origin")
+# automate.normalPush("origin")
 # output = git.getAllLocalBranchName()
 
 # output = cmd.check_output(
