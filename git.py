@@ -23,6 +23,14 @@ def getActiveBranchName():
     return output[output.index("*") + 1]
 
 
+def getAllLocalBranchName():
+    output = cmd.check_output(
+        ['git', 'branch']).decode("utf-8")
+    output = output.split()
+    output.remove("*")
+    return(output)
+
+
 def run(*args):
     return cmd.check_call(['git'] + list(args))
 
@@ -48,6 +56,10 @@ def branch(name=None):
     run("checkout", "-b", br)
 
 
+def fetch():
+    run("fetch")
+
+
 def push(remote=None, br=None):
     if remote is None:
         remote = input("\nType in the name of the remote: ex: origin")
@@ -57,7 +69,22 @@ def push(remote=None, br=None):
     # runWithOutput("push", "-u", remote, br)
 
 
-def prune(remote=None):
+def deleteBranch(branch):
+    run("branch", "-d", branch)
+
+
+def pruneRemote(remote=None):
+    fetch()
+    localBranches = getAllLocalBranchName()
     if remote is None:
         remote = input("\nType in the name of the remote: ex: origin")
-    run("remote", "prune", remote)
+
+    output = cmd.check_output(
+        ['git', 'remote', 'prune', remote]).decode("utf-8")
+    output = output.split()
+    for pruned in output:
+        if "origin/" in pruned:
+            origin, branch = pruned.split('/')
+            if branch in localBranches:
+                print(f'Deleted Branch : {branch}')
+                deleteBranch(branch)

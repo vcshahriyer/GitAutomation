@@ -24,22 +24,3 @@ def normalPush(remote, branch=None):
         git.push(remote)
     else:
         git.push(remote, branch)
-
-
-if __name__ == "__main__":
-    # newBranchPush()
-    branch = "pythonScript"
-    output = subprocess.check_output(
-        ['git', 'push', 'origin', 'pythonScript', '--verbose'])
-
-    arr = output.split()
-    url = 'https://pythonexamples.org'
-
-    print(output)
-    for mystring in arr:
-        if '/pull' in mystring:
-            webbrowser.get('chrome').open(mystring)
-            print("Raghib: "+mystring)
-
-
-# https://github.com/vcshahriyer/movies/pull/new/pythonScript
