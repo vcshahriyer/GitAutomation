@@ -4,16 +4,12 @@ import os
 import git
 import gitAutomate as automate
 
-basePath = "./movies"
-# wd = os.getcwd()
-# os.chdir(basePath)
-# cmd.run('dir', shell=True, cwd=basePath)
-# cmd.run("dir", check=True, shell=True)
-# cmd.run("git status", check=True, shell=True)
+# automate.newBranchPush("origin")
+automate.normalPush("origin")
+# output = git.getAllLocalBranchName()
+
 # output = cmd.check_output(
-#     ['git', 'config', '--list'])
+#     ['git', 'remote', 'prune', 'origin']).decode("utf-8")
+# output = output.split()
 
-automate.newBranchPush("origin")
-
-
-# print(git.getActiveBranchName())
+# git.pruneLocal("origin", True)
