@@ -6,6 +6,11 @@ webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(
     "C://Program Files (x86)//Google//Chrome//Application//chrome.exe"))
 
 
+def sync(remote):
+    git.fetch()
+    git.pull(remote)
+
+
 def newBranchPush(remote):
     branch = input("\nType the branch name you want to create: ")
     userName, repoName = git.gitRemoteInfo()
