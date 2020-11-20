@@ -31,6 +31,16 @@ def getAllLocalBranchName():
     return(output)
 
 
+def getAllRemoteBranchName():
+    output = cmd.check_output(
+        ['git', 'branch', '-r']).decode("utf-8")
+    output = output.split()
+    remoteBranches = []
+    for branch in output:
+        remoteBranches.append(branch.split("/")[1])
+    return(remoteBranches)
+
+
 def run(*args):
     return cmd.check_call(['git'] + list(args))
 
@@ -62,22 +72,25 @@ def fetch():
 
 def push(remote=None, br=None):
     if remote is None:
-        remote = input("\nType in the name of the remote: ex: origin")
+        remote = input("\nType in the name of the remote: ex: origin ")
     if br is None:
         br = getActiveBranchName()
     run("push", "-u", remote, br)
     # runWithOutput("push", "-u", remote, br)
 
 
-def deleteBranch(branch):
-    run("branch", "-d", branch)
+def deleteBranch(branch, force):
+    if force:
+        run("branch", "-D", branch)
+    else:
+        run("branch", "-d", branch)
 
 
-def pruneRemote(remote=None):
+def pruneRemote(force=False, remote=None):
     fetch()
-    localBranches = getAllLocalBranchName()
     if remote is None:
-        remote = input("\nType in the name of the remote: ex: origin")
+        remote = input("\nType in the name of the remote: ex: origin ")
+    localBranches = getAllLocalBranchName()
 
     output = cmd.check_output(
         ['git', 'remote', 'prune', remote]).decode("utf-8")
@@ -87,4 +100,17 @@ def pruneRemote(remote=None):
             origin, branch = pruned.split('/')
             if branch in localBranches:
                 print(f'Deleted Branch : {branch}')
-                deleteBranch(branch)
+                deleteBranch(branch, force)
+
+
+def pruneLocal(force=False, remote=None):
+    if remote is None:
+        remote = input("\nType in the name of the remote: ex: origin ")
+    fetch()
+    run('remote', 'prune', remote)
+    localBranches = getAllLocalBranchName()
+    remoteBranches = getAllRemoteBranchName()
+    for br in localBranches:
+        if br not in remoteBranches:
+            print(f'Deleted Branch : {br}')
+            deleteBranch(br, force)
