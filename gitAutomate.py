@@ -10,21 +10,21 @@ def newBranchPush():
     git.push("origin", branch)
 
 
+def normalPush(remote, branch=None):
+    git.add()
+    git.commit()
+    if branch is None:
+        git.push(remote)
+    else:
+        git.push(remote, branch)
+
+
 if __name__ == "__main__":
     # newBranchPush()
     branch = "pythonScript"
-    # git.commit()
-    # git.branch(branch)
-    # print(git.push("origin", branch))
-
-    # proc = subprocess.Popen(
-    #     ['git', 'push', 'origin', 'pythonScript'], stdout=subprocess.PIPE)
     output = subprocess.check_output(
         ['git', 'push', 'origin', 'pythonScript', '--verbose'])
-    # proc = subprocess.Popen(
-    #     ['git', 'config', '--list'], stdout=subprocess.PIPE)
-    # stdout, _ = proc.communicate()
-    # output = stdout.decode('utf-8').strip()
+
     arr = output.split()
     url = 'https://pythonexamples.org'
     webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(

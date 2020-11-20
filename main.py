@@ -2,6 +2,7 @@ import subprocess as cmd
 import re
 import os
 import git
+import gitAutomate as automate
 
 basePath = "./movies"
 # wd = os.getcwd()
@@ -12,9 +13,7 @@ basePath = "./movies"
 # output = cmd.check_output(
 #     ['git', 'config', '--list'])
 
-git.add()
-git.commit("Second Commit using py script")
-git.push("origin")
+automate.normalPush("origin")
 
 
 # print(git.getActiveBranchName())
