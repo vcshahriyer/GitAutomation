@@ -13,7 +13,7 @@ basePath = "./movies"
 # output = cmd.check_output(
 #     ['git', 'config', '--list'])
 
-automate.normalPush("origin")
+automate.newBranchPush("origin")
 
 
 # print(git.getActiveBranchName())
