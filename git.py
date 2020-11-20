@@ -70,9 +70,15 @@ def fetch():
     run("fetch")
 
 
+def pull(remote=None):
+    if remote is None:
+        remote = input("\nType in the name (origin) of the remote:  ")
+    run("pull", remote)
+
+
 def push(remote=None, br=None):
     if remote is None:
-        remote = input("\nType in the name of the remote: ex: origin ")
+        remote = input("\nType in the name (origin) of the remote: ")
     if br is None:
         br = getActiveBranchName()
     run("push", "-u", remote, br)
@@ -89,7 +95,7 @@ def deleteBranch(branch, force):
 def pruneRemote(force=False, remote=None):
     fetch()
     if remote is None:
-        remote = input("\nType in the name of the remote: ex: origin ")
+        remote = input("\nType in the name (origin) of the remote: ")
     localBranches = getAllLocalBranchName()
 
     output = cmd.check_output(
@@ -105,7 +111,7 @@ def pruneRemote(force=False, remote=None):
 
 def pruneLocal(force=False, remote=None):
     if remote is None:
-        remote = input("\nType in the name of the remote: ex: origin ")
+        remote = input("\nType in the name (origin) of the remote: ")
     fetch()
     run('remote', 'prune', remote)
     localBranches = getAllLocalBranchName()
