@@ -29,7 +29,8 @@ def normalPushPR(remote):
     git.add()
     git.commit()
     git.push(remote, branch)
-    webbrowser.get('chrome').open(url)
+    if branch != "master":
+        webbrowser.get('chrome').open(url)
 
 
 def normalPush(remote, branch=None):
