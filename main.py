@@ -12,13 +12,12 @@ basePath = "./movies"
 # output = cmd.check_output(
 #     ['git', 'config', '--list'])
 
+git.add()
+git.commit("Second Commit using py script")
+# git.push("origin")
 
 # output = cmd.check_output(
-#     ["git", "remote", "prune", "origin"])
-
-git.add()
-git.commit("First Commit using py script")
-git.push("origin")
+#     ["git", "branch"])
 
 
-# print(git.gitRemoteInfo())
+# print(output)
