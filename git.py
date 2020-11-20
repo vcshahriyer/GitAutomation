@@ -16,6 +16,13 @@ def gitRemoteInfo():
     return [userName, repoName[:-1]]
 
 
+def getActiveBranchName():
+    output = cmd.check_output(
+        ["git", "branch"]).decode("utf-8")
+    output = output.split()
+    return output[output.index("*") + 1]
+
+
 def run(*args):
     return cmd.check_call(['git'] + list(args))
 
@@ -45,7 +52,7 @@ def push(remote=None, br=None):
     if remote is None:
         remote = input("\nType in the name of the remote: ex: origin")
     if br is None:
-        br = input("\nType in the name of branch to push")
+        br = getActiveBranchName()
     run("push", "-u", remote, br)
     # runWithOutput("push", "-u", remote, br)
 
