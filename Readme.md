@@ -27,6 +27,8 @@ _remote = "your remote name"
 
 ## Usage
 
+**Note: Make Sure you have changes to commit; On 🚫"Clean working dir"🚫 commands will not work**
+
 > Add git.py , gitAutomate.py and main.py at your project root and Update your gitignore
 
 ```
@@ -38,4 +40,16 @@ main.py
 
 > Run the main.py from your project root ( **python -u .\main.py** )
 
-**Note: Make Sure you have changes to commit; On 🚫"Clean working dir"🚫 commands will not work**
+> You can run the script with choice & argument (remote)
+
+```
+python .\main.py --choice=npr origin
+```
+
+## Upcoming
+
+Commands without changes (Clean working Dir) :
+
+- Only create new Branch and pull-request.
+- Only create pull-request.
+- Prune local branches with the selected remote.
