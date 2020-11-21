@@ -1,5 +1,4 @@
 import git
-import subprocess
 import webbrowser
 
 webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(

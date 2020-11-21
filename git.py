@@ -1,6 +1,5 @@
 import subprocess as cmd
 import re
-import os
 
 
 def gitRemoteInfo():
