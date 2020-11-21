@@ -30,6 +30,7 @@ _remote = "your remote name"
 > Add git.py , gitAutomate.py and main.py at your project root and Update your gitignore
 
 ```
+__pycache__
 git.py
 gitAutomate.py
 main.py
