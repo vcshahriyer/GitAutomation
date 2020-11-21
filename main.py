@@ -1,23 +1,30 @@
-import subprocess as cmd
-import re
-import os
-import git
 import gitAutomate as automate
 import click
 
-remote = "origin"
+# Default variables
+_remote = "origin"
 
 
 @click.command()
-@click.option('--np', default='np', help='Commit & Push active branch.')
-@click.argument('remote', required=False)
-def GitHub(np, remote):
+@click.option('--choice', prompt='Type Command Shorthand', help='Commit & Push active branch.')
+@click.option('--remote', default=_remote, prompt='Remote Name', help='Remote name of your project Repo')
+def GitHub(choice, remote):
     """GitHub automation tool for numerous workflow."""
-    if np == 'np':
+    if choice == 'sync':
+        automate.sync(remote)
+    elif choice == 'np':
         automate.normalPush(remote)
+    elif choice == 'npr':
+        automate.normalPushPR(remote)
 
 
 if __name__ == '__main__':
+    print("Available Commands: \n")
+    print("\033[1;32;40m [sync]   :       \033[0m Synchronize local with remote. ")
+    print("\033[1;32;40m [np]     :       \033[0m Normal Push Current Branch. ")
+    print(
+        "\033[1;32;40m [npr]    :       \033[0m Normal Push with pull-request (except Master). ")
+
     GitHub()
 
 # automate.newBranchPush("origin")
