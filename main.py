@@ -10,7 +10,7 @@ remote = "origin"
 
 @click.command()
 @click.option('--np', default='np', help='Commit & Push active branch.')
-@click.option('--remote', required=False, prompt='Remote Name', help='Remote name of your project Repo')
+@click.argument('remote', required=False)
 def GitHub(np, remote):
     """GitHub automation tool for numerous workflow."""
     if np == 'np':
