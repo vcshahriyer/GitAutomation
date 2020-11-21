@@ -35,7 +35,9 @@ def getAllRemoteBranchName():
     output = output.split()
     remoteBranches = []
     for branch in output:
-        remoteBranches.append(branch.split("/")[1])
+        if "/" in branch:
+            if branch.split("/")[1] != "HEAD":
+                remoteBranches.append(branch.split("/")[1])
     return(remoteBranches)
 
 
@@ -100,7 +102,7 @@ def pruneRemote(force=False, remote=None):
         ['git', 'remote', 'prune', remote]).decode("utf-8")
     output = output.split()
     for pruned in output:
-        if "origin/" in pruned:
+        if f'{remote}/' in pruned:
             origin, branch = pruned.split('/')
             if branch in localBranches:
                 print(f'Deleted Branch : {branch}')
