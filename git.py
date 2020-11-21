@@ -8,12 +8,11 @@ def gitRemoteInfo():
     output = output.split()
     for str in output:
         m = re.search('com[:\/](.+)git$', str)
-        if "github.com" in str:
-            if m:
-                found = m.group(1)
-                break
-    userName, repoName = found.split('/')
-    return [userName, repoName[:-1]]
+        if m:
+            found = m.group(1)
+            userName, repoName = found.split('/')
+            return [userName, repoName[:-1]]
+    return None
 
 
 def getActiveBranchName():

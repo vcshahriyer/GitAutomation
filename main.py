@@ -44,14 +44,3 @@ if __name__ == '__main__':
         "\033[1;32;40m [prnl]   :       \033[0m Prune Local Branches. ")
 
     GitHub()
-
-# automate.newBranchPush("origin")
-# automate.normalPushPR("origin")
-# automate.normalPush("origin")
-# output = git.getAllLocalBranchName()
-
-# output = cmd.check_output(
-#     ['git', 'remote', 'prune', 'origin']).decode("utf-8")
-# output = output.split()
-
-# git.pruneLocal("origin", True)
