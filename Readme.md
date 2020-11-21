@@ -37,3 +37,5 @@ main.py
 ```
 
 > Run the main.py from your project root ( **python -u .\main.py** )
+
+**Note: Make Sure you have changes to commit; On 🚫"Clean working dir"🚫 commands will not work**
