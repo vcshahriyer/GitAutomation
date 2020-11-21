@@ -28,6 +28,8 @@ def GitHub(choice, remote):
     elif choice == 'prnl':
         force = input("\nForce Prune? (True/False) : ")
         git.pruneLocal(force, remote)
+    else:
+        print("\033[1;31;40m Wrong Command Shorthand!")
 
 
 if __name__ == '__main__':
