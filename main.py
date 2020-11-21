@@ -3,9 +3,25 @@ import re
 import os
 import git
 import gitAutomate as automate
+import click
+
+remote = "origin"
+
+
+@click.command()
+@click.option('--np', default='np', help='Commit & Push active branch.')
+@click.option('--remote', required=False, prompt='Remote Name', help='Remote name of your project Repo')
+def GitHub(np, remote):
+    """GitHub automation tool for numerous workflow."""
+    if np == 'np':
+        automate.normalPush(remote)
+
+
+if __name__ == '__main__':
+    GitHub()
 
 # automate.newBranchPush("origin")
-automate.normalPushPR("origin")
+# automate.normalPushPR("origin")
 # automate.normalPush("origin")
 # output = git.getAllLocalBranchName()
 
