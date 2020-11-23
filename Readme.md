@@ -27,7 +27,7 @@ _remote = "your remote name"
 
 ## Usage
 
-**Note: Make Sure you have changes to commit; On 🚫"Clean working dir"🚫 commands will not work**
+### <span style="color:#CC3333">**Note: Make Sure you have changes to commit; On 🚫"Clean working dir"🚫 commands will not work**<span>
 
 > Add git.py , gitAutomate.py and main.py at your project root and Update your gitignore
 
@@ -45,6 +45,10 @@ main.py
 ```
 python .\main.py --choice=npr origin
 ```
+
+![Commands](./assets/Annotation.jpg)
+
+## <span style="color:#FFCC00">"Normal Push" includes 'git add' and 'git commit'<span></span>
 
 ## Upcoming
 
