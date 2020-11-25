@@ -29,13 +29,13 @@ def getAllLocalBranchName():
     return(output)
 
 
-def getAllRemoteBranchName():
+def getAllRemoteBranchName(remote):
     output = cmd.check_output(
         ['git', 'branch', '-r']).decode("utf-8")
     output = output.split()
     remoteBranches = []
     for branch in output:
-        if "/" in branch:
+        if f'{remote}/' in branch:
             if branch.split("/")[1] != "HEAD":
                 remoteBranches.append(branch.split("/")[1])
     return(remoteBranches)
@@ -115,7 +115,7 @@ def pruneLocal(force=False, remote=None):
     fetch()
     run('remote', 'prune', remote)
     localBranches = getAllLocalBranchName()
-    remoteBranches = getAllRemoteBranchName()
+    remoteBranches = getAllRemoteBranchName(remote)
     for br in localBranches:
         if br not in remoteBranches:
             print(f'Deleted Branch : {br}')
