@@ -56,4 +56,4 @@ Commands without changes (Clean working Dir) :
 
 - Only create new Branch and pull-request.
 - Only create pull-request.
-- Prune local branches with the selected remote.
+- ✅ Prune local branches with the selected remote.
