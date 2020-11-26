@@ -70,10 +70,12 @@ def fetch():
     run("fetch")
 
 
-def pull(remote=None):
+def pull(remote=None, branch=None):
     if remote is None:
         remote = input("\nType in the name (origin) of the remote:  ")
-    run("pull", remote)
+    if branch is None:
+        branch = getActiveBranchName()
+    run("pull", remote, branch)
 
 
 def push(remote=None, br=None):
