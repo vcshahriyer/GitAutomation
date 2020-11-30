@@ -28,6 +28,8 @@ def GitHub(choice, remote):
     elif choice == 'prnl':
         force = input("\nForce Prune? (True/False) : ")
         git.pruneLocal(force, remote)
+    elif choice == 'jpr':
+        automate.justPulrequest(remote)
     else:
         print("\033[1;31;40m Wrong Command Shorthand!")
 
@@ -44,5 +46,7 @@ if __name__ == '__main__':
         "\033[1;32;40m [prnr]   :       \033[0m Prune Remote Branches. ")
     print(
         "\033[1;32;40m [prnl]   :       \033[0m Prune Local Branches. ")
+    print(
+        "\033[1;32;40m [jpr]   :       \033[0m Just create pull-request. (No git -add,-commit) ")
 
     GitHub()
