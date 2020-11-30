@@ -32,6 +32,15 @@ def normalPushPR(remote):
         webbrowser.get('chrome').open(url)
 
 
+def justPulrequest(remote):
+    branch = git.getActiveBranchName()
+    userName, repoName = git.gitRemoteInfo()
+    url = f'https://github.com/{userName}/{repoName}/pull/new/{branch}'
+    git.push(remote, branch)
+    if branch != "master":
+        webbrowser.get('chrome').open(url)
+
+
 def normalPush(remote, branch=None):
     git.add()
     git.commit()

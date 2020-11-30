@@ -54,6 +54,6 @@ python .\main.py --choice=npr origin
 
 Commands without changes (Clean working Dir) :
 
-- Only create new Branch and pull-request.
-- Only create pull-request.
+- Just create new Branch and pull-request.
+- Just create pull-request.
 - ✅ Prune local branches with the selected remote.
