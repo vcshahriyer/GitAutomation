@@ -1,8 +1,8 @@
 import git
 import webbrowser
 
-webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(
-    "C://Program Files (x86)//Google//Chrome//Application//chrome.exe"))
+# webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(
+#     "C://Program Files (x86)//Google//Chrome//Application//chrome.exe"))
 
 
 def sync(remote):
@@ -18,7 +18,8 @@ def newBranchPushPR(remote):
     git.commit()
     git.branch(branch)
     git.push(remote, branch)
-    webbrowser.get('chrome').open(url)
+    # webbrowser.get('chrome').open(url)
+    webbrowser.open(url)
 
 
 def normalPushPR(remote):
@@ -29,7 +30,8 @@ def normalPushPR(remote):
     git.commit()
     git.push(remote, branch)
     if branch != "master":
-        webbrowser.get('chrome').open(url)
+        # webbrowser.get('chrome').open(url)
+        webbrowser.open(url)
 
 
 def justPulrequest(remote):
@@ -38,7 +40,8 @@ def justPulrequest(remote):
     url = f'https://github.com/{userName}/{repoName}/pull/new/{branch}'
     git.push(remote, branch)
     if branch != "master":
-        webbrowser.get('chrome').open(url)
+        # webbrowser.get('chrome').open(url)
+        webbrowser.open(url)
 
 
 def normalPush(remote, branch=None):
