@@ -1,0 +1,15 @@
+{
+    "name": "@shahriyer/GitAutomation",
+    "version": "1.0.0",
+    "description": "Automate your git workflow with single script.",
+    "license": "MIT",
+    "repository": "vcshahriyer/GitAutomation",
+    "main": "main.py",
+    "keywords": [
+      "git",
+      "automation",
+      "GitAutomation",
+      "npm",
+      "package"
+    ]
+  }
