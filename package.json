@@ -1,15 +1,22 @@
 {
-    "name": "@shahriyer/GitAutomation",
-    "version": "1.0.0",
-    "description": "Automate your git workflow with single script.",
-    "license": "MIT",
-    "repository": "vcshahriyer/GitAutomation",
-    "main": "main.py",
-    "keywords": [
-      "git",
-      "automation",
-      "GitAutomation",
-      "npm",
-      "package"
-    ]
-  }
+  "name": "@shahriyer/gitautomation",
+  "version": "1.0.0",
+  "description": "Automate your git workflow with single script.",
+  "main": "main.py",
+  "scripts": {
+    "test": "python main.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vcshahriyer/GitAutomation.git"
+  },
+  "keywords": [
+    "gitautomation"
+  ],
+  "author": "Raghib Shahriyer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vcshahriyer/GitAutomation/issues"
+  },
+  "homepage": "https://github.com/vcshahriyer/GitAutomation#readme"
+}
