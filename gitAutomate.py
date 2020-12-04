@@ -134,7 +134,7 @@ def pruneLocal(force=False, remote=None):
 
 
 def sync(remote):
-    fetch()
+    fetch(remote)
     pull(remote)
 
 
