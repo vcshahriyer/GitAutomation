@@ -35,6 +35,19 @@ gitAutomate.py
 python .\gitAutomate.py --choice=npr origin
 ```
 
+## NPM package @shahriyer/gitautomation
+
+`npm i @shahriyer/gitautomation`
+install this package with npm and add a script command in your package.json file
+
+```
+"scripts": {
+    "automate": "python .\\node_modules\\@shahriyer\\gitautomation\\gitAutomate.py"
+  }
+```
+
+### and now you can run **npm run automate**
+
 ![Commands](./assets/Annotation.jpg)
 
 ## <span style="color:#FFCC00">"Normal Push" includes 'git add' and 'git commit'<span></span>
