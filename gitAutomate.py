@@ -138,6 +138,15 @@ def sync(remote):
     pull(remote)
 
 
+def justNewBranchPushPR(remote):
+    branch = input("\nType the branch name you want to create: ")
+    userName, repoName = gitRemoteInfo()
+    url = f'https://github.com/{userName}/{repoName}/pull/new/{branch}'
+    branch(branch)
+    push(remote, branch)
+    webbrowser.open(url)
+
+
 def newBranchPushPR(remote):
     branch = input("\nType the branch name you want to create: ")
     userName, repoName = gitRemoteInfo()
@@ -205,6 +214,8 @@ def GitHub(choice, remote):
         pruneLocal(force, remote)
     elif choice == 'jpr':
         justPulrequest(remote)
+    elif choice == 'jnbpr':
+        justNewBranchPushPR(remote)
     else:
         print("\033[1;31;40m Wrong Command Shorthand!")
 
@@ -223,5 +234,7 @@ if __name__ == '__main__':
         "\033[1;32;40m [prnl]   :       \033[0m Prune Local Branches. ")
     print(
         "\033[1;32;40m [jpr]   :       \033[0m Just create pull-request. (No git -add,-commit) ")
+    print(
+        "\033[1;32;40m [jnbpr]   :       \033[0m Just create new Branch and pull-request. (No git -add,-commit) ")
 
     GitHub()
