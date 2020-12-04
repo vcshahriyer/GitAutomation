@@ -12,7 +12,7 @@ pip install click
 
 ## Alter Configurations
 
-> In main.py you can setup default variable at top starting with "\_"
+> In gitAutomate.py you can setup default variable at top starting with "\_"
 
 ```python
 _remote = "your remote name"
@@ -20,23 +20,19 @@ _remote = "your remote name"
 
 ## Usage
 
-### <span style="color:#CC3333">**Note: Make Sure you have changes to commit; On 🚫"Clean working dir"🚫 commands will not work**<span>
-
-> Add git.py , gitAutomate.py and main.py at your project root and Update your gitignore
+> Add gitAutomate.py at your project root and Update your gitignore
 
 ```
 __pycache__
-git.py
 gitAutomate.py
-main.py
 ```
 
-> Run the main.py from your project root ( **python -u .\main.py** )
+> Run the gitAutomate.py from your project root ( **python -u .\gitAutomate.py** )
 
 > You can run the script with choice & argument (remote)
 
 ```
-python .\main.py --choice=npr origin
+python .\gitAutomate.py --choice=npr origin
 ```
 
 ![Commands](./assets/Annotation.jpg)
