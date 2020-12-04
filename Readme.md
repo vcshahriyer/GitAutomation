@@ -2,6 +2,8 @@
 
 This is a Python script to automate The boring stuff 🚀.
 
+[![GitHub version](https://badge.fury.io/gh/vcshahriyer%2FGitAutomation.svg)](https://badge.fury.io/gh/vcshahriyer%2FGitAutomation) [![npm version](https://badge.fury.io/js/%40shahriyer%2Fgitautomation.svg)](https://badge.fury.io/js/%40shahriyer%2Fgitautomation) [![GitHub license](https://img.shields.io/github/license/vcshahriyer/GitAutomation)](https://github.com/vcshahriyer/GitAutomation/blob/master/LICENSE)
+
 ## Installation
 
 You may need the package [click](https://pypi.org/project/click/) to install click.
