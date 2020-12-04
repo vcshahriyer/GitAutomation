@@ -1,6 +1,6 @@
 {
   "name": "@shahriyer/gitautomation",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Automate your git workflow with single script.",
   "main": "main.py",
   "scripts": {
