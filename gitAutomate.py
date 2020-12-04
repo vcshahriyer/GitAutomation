@@ -67,12 +67,9 @@ def commit(message=None):
 
 
 def branch(name=None):
-    if name is not None:
-        br = f'{name}'
-    else:
-        branch = input("\nType in the name of the branch you want to make: ")
-        br = f'{branch}'
-    run("checkout", "-b", br)
+    if name is None:
+        name = input("\nType in the name of the branch you want to make: ")
+    run("checkout", "-b", name)
 
 
 def fetch(remote):
@@ -139,11 +136,11 @@ def sync(remote):
 
 
 def justNewBranchPushPR(remote):
-    branch = input("\nType the branch name you want to create: ")
+    b_name = input("\nType the branch name you want to create: ")
     userName, repoName = gitRemoteInfo()
     url = f'https://github.com/{userName}/{repoName}/pull/new/{branch}'
-    branch(branch)
-    push(remote, branch)
+    branch(b_name)
+    push(remote, b_name)
     webbrowser.open(url)
 
 
