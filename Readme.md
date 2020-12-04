@@ -58,6 +58,6 @@ install this package with npm and add a script command in your package.json file
 
 Commands without changes (Clean working Dir) :
 
-- Just create new Branch and pull-request.
+- ✅ Just create new Branch and pull-request.
 - ✅ Just create pull-request.
 - ✅ Prune local branches with the selected remote.
