@@ -2,7 +2,7 @@
 
 This is a Python script to automate The boring stuff 🚀.
 
-![GitHub package.json version](https://img.shields.io/github/package-json/v/vcshahriyer/GitAutomation) ![npm (scoped)](https://img.shields.io/npm/v/@shahriyer/gitautomation) [![GitHub license](https://img.shields.io/github/license/vcshahriyer/GitAutomation)](https://github.com/vcshahriyer/GitAutomation/blob/master/LICENSE)
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/vcshahriyer/GitAutomation) ![npm (scoped)](https://img.shields.io/npm/v/@shahriyer/gitautomation) [![GitHub license](https://img.shields.io/github/license/vcshahriyer/GitAutomation)](https://github.com/vcshahriyer/GitAutomation/blob/master/LICENSE)
 
 ## Installation
 
