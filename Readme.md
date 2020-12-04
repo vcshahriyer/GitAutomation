@@ -12,13 +12,6 @@ pip install click
 
 ## Alter Configurations
 
-> In gitAutomate.py change the path of the chrome browser according to your setup
-
-```python
-webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(
-    "C://Program Files (x86)//Google//Chrome//Application//chrome.exe"))
-```
-
 > In main.py you can setup default variable at top starting with "\_"
 
 ```python
