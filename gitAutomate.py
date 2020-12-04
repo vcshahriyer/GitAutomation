@@ -76,12 +76,12 @@ def fetch(remote):
     run("fetch", remote)
 
 
-def pull(remote=None, branch=None):
+def pull(remote=None, b_name=None):
     if remote is None:
         remote = input("\nType in the name (origin) of the remote:  ")
-    if branch is None:
-        branch = getActiveBranchName()
-    run("pull", remote, branch)
+    if b_name is None:
+        b_name = getActiveBranchName()
+    run("pull", remote, b_name)
 
 
 def push(remote=None, br=None):
@@ -93,11 +93,11 @@ def push(remote=None, br=None):
     # runWithOutput("push", "-u", remote, br)
 
 
-def deleteBranch(branch, force):
+def deleteBranch(b_name, force):
     if force:
-        run("branch", "-D", branch)
+        run("branch", "-D", b_name)
     else:
-        run("branch", "-d", branch)
+        run("branch", "-d", b_name)
 
 
 def pruneRemote(force=False, remote=None):
@@ -138,53 +138,53 @@ def sync(remote):
 def justNewBranchPushPR(remote):
     b_name = input("\nType the branch name you want to create: ")
     userName, repoName = gitRemoteInfo()
-    url = f'https://github.com/{userName}/{repoName}/pull/new/{branch}'
+    url = f'https://github.com/{userName}/{repoName}/pull/new/{b_name}'
     branch(b_name)
     push(remote, b_name)
     webbrowser.open(url)
 
 
 def newBranchPushPR(remote):
-    branch = input("\nType the branch name you want to create: ")
+    b_name = input("\nType the branch name you want to create: ")
     userName, repoName = gitRemoteInfo()
-    url = f'https://github.com/{userName}/{repoName}/pull/new/{branch}'
+    url = f'https://github.com/{userName}/{repoName}/pull/new/{b_name}'
     add()
     commit()
-    branch(branch)
-    push(remote, branch)
+    branch(b_name)
+    push(remote, b_name)
     # webbrowser.get('chrome').open(url)
     webbrowser.open(url)
 
 
 def normalPushPR(remote):
-    branch = getActiveBranchName()
+    b_name = getActiveBranchName()
     userName, repoName = gitRemoteInfo()
-    url = f'https://github.com/{userName}/{repoName}/pull/new/{branch}'
+    url = f'https://github.com/{userName}/{repoName}/pull/new/{b_name}'
     add()
     commit()
-    push(remote, branch)
-    if branch != "master":
+    push(remote, b_name)
+    if b_name != "master":
         # webbrowser.get('chrome').open(url)
         webbrowser.open(url)
 
 
 def justPulrequest(remote):
-    branch = getActiveBranchName()
+    b_name = getActiveBranchName()
     userName, repoName = gitRemoteInfo()
-    url = f'https://github.com/{userName}/{repoName}/pull/new/{branch}'
-    push(remote, branch)
-    if branch != "master":
+    url = f'https://github.com/{userName}/{repoName}/pull/new/{b_name}'
+    push(remote, b_name)
+    if b_name != "master":
         # webbrowser.get('chrome').open(url)
         webbrowser.open(url)
 
 
-def normalPush(remote, branch=None):
+def normalPush(remote, b_name=None):
     add()
     commit()
-    if branch is None:
+    if b_name is None:
         push(remote)
     else:
-        push(remote, branch)
+        push(remote, b_name)
 
 
 @click.command()
