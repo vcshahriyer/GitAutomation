@@ -1,6 +1,6 @@
 {
   "name": "@shahriyer/gitautomation",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Automate your git workflow with single script.",
   "main": "main.py",
   "scripts": {
@@ -11,7 +11,9 @@
     "url": "git+https://github.com/vcshahriyer/GitAutomation.git"
   },
   "keywords": [
-    "gitautomation"
+    "gitautomation",
+    "github",
+    "automation"
   ],
   "author": "Raghib Shahriyer",
   "license": "MIT",
