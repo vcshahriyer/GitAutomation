@@ -230,8 +230,8 @@ if __name__ == '__main__':
     print(
         "\033[1;32;40m [prnl]   :       \033[0m Prune Local Branches. ")
     print(
-        "\033[1;32;40m [jpr]   :       \033[0m Just create pull-request. (No git -add,-commit) ")
+        "\033[1;32;40m [jpr]    :       \033[0m Just create pull-request. (No git -add,-commit) ")
     print(
-        "\033[1;32;40m [jnbpr]   :       \033[0m Just create new Branch and pull-request. (No git -add,-commit) ")
+        "\033[1;32;40m [jnbpr]  :       \033[0m Just create new Branch and pull-request. (No git -add,-commit) ")
 
     GitHub()
