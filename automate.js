@@ -29,6 +29,35 @@ const gitRemoteInfo = () => {
   });
 };
 
-gitRemoteInfo().then((res) => {
-  console.log(res.userName);
+const getActiveBranchName = () => {
+return new Promise((resolve, reject) => {
+  const cmd = run("branch");
+  cmd.stdout.on("data", (output) => {
+    const parse = output.split(" ");
+    const indx = parse.indexOf("*");
+    const branch = parse[indx+1];
+    resolve(branch.trim());
+  });
+});
+}
+
+const getAllLocalBranchName = () => {
+return new Promise((resolve, reject) => {
+  const cmd = run("branch");
+  cmd.stdout.on("data", (output) => {
+    const parse = output.split(" ");
+    const branches = [];
+    for(item of parse ){
+      if(item === '*' || item === ''){
+        continue
+      }
+      branches.push(item.trim())
+    }
+    resolve(branches);
+  });
+});
+}
+
+getAllLocalBranchName().then((res) => {
+  console.log(res);
 });
