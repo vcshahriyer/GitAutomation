@@ -58,6 +58,23 @@ return new Promise((resolve, reject) => {
 });
 }
 
-getAllLocalBranchName().then((res) => {
+const getAllRemoteBranchName = (remote) => {
+  return new Promise((resolve, reject) => {
+    const cmd = run("branch -r");
+    cmd.stdout.on("data", (output) => {
+      const parse = output.split(" ");
+      let remoteBranches = [];
+      for(item of parse ){
+        if(item.includes(`${remote}/`) && !item.includes('HEAD')){
+          remoteBranches.push(item.split('/')[1].trim())
+        }
+      }
+      resolve(remoteBranches);
+    });
+  });
+}
+
+
+getAllRemoteBranchName("origin").then((res) => {
   console.log(res);
 });
