@@ -74,7 +74,8 @@ const getAllRemoteBranchName = (remote) => {
   });
 }
 
+const add = () => {
+  run("add -A");
+}
 
-getAllRemoteBranchName("origin").then((res) => {
-  console.log(res);
-});
+add()
