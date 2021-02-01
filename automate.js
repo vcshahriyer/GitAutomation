@@ -1,4 +1,5 @@
 const { exec } = require("child_process");
+const readline = require('readline');
 
 // Default variables
 const _remote = "origin";
@@ -78,4 +79,23 @@ const add = () => {
   run("add -A");
 }
 
-add()
+const commit = (message) =>{
+  if(!message){
+  const read = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+read.question('Type in your commit message: ', (answer) => {
+  run(`commit -am "${answer}"`);
+  read.close();
+});
+
+}
+//   message = input("\nType in your commit message: ")
+// commit_message = f'{message}'
+// run("commit", "-am", commit_message)
+}
+
+
+commit()
