@@ -81,20 +81,17 @@ const add = () => {
 
 const commit = (message) =>{
   if(!message){
-  const read = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+    const read = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
 
-read.question('Type in your commit message: ', (answer) => {
-  run(`commit -am "${answer}"`);
-  read.close();
-});
+  read.question('Type in your commit message: ', (answer) => {
+    run(`commit -am "${answer}"`);
+    read.close();
+  });
 
-}
-//   message = input("\nType in your commit message: ")
-// commit_message = f'{message}'
-// run("commit", "-am", commit_message)
+  }
 }
 
 
