@@ -1,5 +1,5 @@
 const { exec } = require("child_process");
-const readline = require('readline');
+const readline = require("readline");
 
 // Default variables
 const _remote = "origin";
@@ -31,33 +31,33 @@ const gitRemoteInfo = () => {
 };
 
 const getActiveBranchName = () => {
-return new Promise((resolve, reject) => {
-  const cmd = run("branch");
-  cmd.stdout.on("data", (output) => {
-    const parse = output.split(" ");
-    const indx = parse.indexOf("*");
-    const branch = parse[indx+1];
-    resolve(branch.trim());
+  return new Promise((resolve, reject) => {
+    const cmd = run("branch");
+    cmd.stdout.on("data", (output) => {
+      const parse = output.split(" ");
+      const indx = parse.indexOf("*");
+      const branch = parse[indx + 1];
+      resolve(branch.trim());
+    });
   });
-});
-}
+};
 
 const getAllLocalBranchName = () => {
-return new Promise((resolve, reject) => {
-  const cmd = run("branch");
-  cmd.stdout.on("data", (output) => {
-    const parse = output.split(" ");
-    const branches = [];
-    for(item of parse ){
-      if(item === '*' || item === ''){
-        continue
+  return new Promise((resolve, reject) => {
+    const cmd = run("branch");
+    cmd.stdout.on("data", (output) => {
+      const parse = output.split(" ");
+      const branches = [];
+      for (item of parse) {
+        if (item === "*" || item === "") {
+          continue;
+        }
+        branches.push(item.trim());
       }
-      branches.push(item.trim())
-    }
-    resolve(branches);
+      resolve(branches);
+    });
   });
-});
-}
+};
 
 const getAllRemoteBranchName = (remote) => {
   return new Promise((resolve, reject) => {
@@ -65,34 +65,49 @@ const getAllRemoteBranchName = (remote) => {
     cmd.stdout.on("data", (output) => {
       const parse = output.split(" ");
       let remoteBranches = [];
-      for(item of parse ){
-        if(item.includes(`${remote}/`) && !item.includes('HEAD')){
-          remoteBranches.push(item.split('/')[1].trim())
+      for (item of parse) {
+        if (item.includes(`${remote}/`) && !item.includes("HEAD")) {
+          remoteBranches.push(item.split("/")[1].trim());
         }
       }
       resolve(remoteBranches);
     });
   });
-}
+};
 
 const add = () => {
   run("add -A");
-}
+};
 
-const commit = (message) =>{
-  if(!message){
+const commit = (message) => {
+  if (!message) {
     const read = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
+      input: process.stdin,
+      output: process.stdout,
+    });
 
-  read.question('Type in your commit message: ', (answer) => {
-    run(`commit -am "${answer}"`);
-    read.close();
-  });
-
+    read.question("Type in your commit message: ", (answer) => {
+      run(`commit -am "${answer}"`);
+      read.close();
+    });
   }
-}
+};
 
+const branch = (name) => {
+  if (!name) {
+    const read = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
 
-commit()
+    read.question(
+      "Type in the name of the branch you want to make: ",
+      (answer) => {
+        run(`checkout -b ${answer}`);
+        read.close();
+      }
+    );
+  }
+};
+
+branch();
