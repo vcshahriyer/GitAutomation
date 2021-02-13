@@ -110,4 +110,8 @@ const branch = (name) => {
   }
 };
 
-branch();
+const fetch = (remote) => {
+  run(`fetch ${remote}`);
+};
+
+fetch("origin");
