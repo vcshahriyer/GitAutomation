@@ -114,4 +114,15 @@ const fetch = (remote) => {
   run(`fetch ${remote}`);
 };
 
-fetch("origin");
+const pull = (remote, b_name=null) => {
+  if(!b_name) {
+    getActiveBranchName().then(branchName=>{
+    run(`pull ${remote} ${branchName}`);
+  })}else{
+    run(`pull ${remote} ${b_name}`);
+  }
+  
+}
+
+
+pull("origin");
