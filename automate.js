@@ -137,4 +137,4 @@ const push = (remote, b_name=null) => {
 
 
 
-pull("origin");
+push("origin");
