@@ -95,6 +95,7 @@ const commit = (message) => {
 
 const branch = () => {
   return new Promise((resolve, reject) => {
+    let b_name = '';
     const read = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
@@ -103,12 +104,12 @@ const branch = () => {
     read.question(
       "Type in the name of the branch you want to make: ",
       (answer) => {
-        if(run(`checkout -b ${answer}`)){
-          resolve(answer)
-        }
+        run(`checkout -b ${answer}`)
+        b_name = answer;
         read.close();
       }
     );
+    resolve(b_name)
   });
 };
 
