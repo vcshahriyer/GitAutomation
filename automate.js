@@ -1,6 +1,6 @@
 const { exec } = require("child_process");
 const readline = require("readline");
-
+const open = require("open")
 // Default variables
 const _remote = "origin";
 
@@ -93,8 +93,8 @@ const commit = (message) => {
   }
 };
 
-const branch = (name) => {
-  if (!name) {
+const branch = () => {
+  return new Promise((resolve, reject) => {
     const read = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
@@ -105,9 +105,10 @@ const branch = (name) => {
       (answer) => {
         run(`checkout -b ${answer}`);
         read.close();
+        resolve(answer)
       }
     );
-  }
+  });
 };
 
 const fetch = (remote) => {
@@ -135,6 +136,57 @@ const push = (remote, b_name=null) => {
 }
 
 
+const deleteBranch = (b_name, force) => {
+    if (force)
+        run(`branch -D ${b_name}`)
+    else
+        run(`branch -d ${b_name}`)
+}
+
+const pruneRemote = async (force=false, remote) =>{
+    // fetch(remote)
+    localBranches = await getAllLocalBranchName()
+
+    const cmd = run(`remote prune ${remote}`);
+    cmd.stdout.on("data", (output) => {
+      const parse = output.split(" ");
+      for (pruned of parse) {
+        if (pruned.includes(`${remote}/`)) {
+          const {origin, branch} = pruned.split("/")
+          if(localBranches.includes(branch))
+            console.log(branch)
+        }
+      }
+    });
+}
+const pruneLocal = async (force=false, remote) =>{
+    fetch(remote)
+    localBranches = await getAllLocalBranchName()
+    run(`remote prune ${remote}`)
+    remoteBranches = await getAllRemoteBranchName(remote)
+
+      for (br of localBranches) {
+        if (!remoteBranches.includes(br)) {
+            console.log(`Deleted Branch: ${br}`)
+            deleteBranch(br)
+        }
+      }
+}
+
+const sync = (remote) => {
+    fetch(remote)
+    pull(remote)
+}
+
+const justNewBranchPushPR = async (remote) => {
+    const {userName, repoName} = await gitRemoteInfo()
+    const b_name = await branch()
+    url = `https://github.com/${userName}/${repoName}/pull/new/${b_name}`
+    push(remote, b_name)
+    open(url)
+}
 
 
-push("origin");
+
+
+justNewBranchPushPR('origin');

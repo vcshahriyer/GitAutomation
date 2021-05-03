@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/vcshahriyer/GitAutomation/issues"
   },
-  "homepage": "https://github.com/vcshahriyer/GitAutomation#readme"
+  "homepage": "https://github.com/vcshahriyer/GitAutomation#readme",
+  "dependencies": {
+    "open": "^8.0.7"
+  }
 }
