@@ -94,7 +94,7 @@ const commit = (message) => {
 };
 
 const branch = (name) => {
-    run(`checkout -b ${answer}`);
+    run(`checkout -b ${name}`);
 };
 
 const fetch = (remote) => {
