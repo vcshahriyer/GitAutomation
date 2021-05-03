@@ -124,5 +124,17 @@ const pull = (remote, b_name=null) => {
   
 }
 
+const push = (remote, b_name=null) => {
+  if(!b_name) {
+    getActiveBranchName().then(branchName=>{
+    run(`push -u ${remote} ${branchName}`);
+  })}else{
+    run(`push -u ${remote} ${b_name}`);
+  }
+  
+}
 
-pull("origin");
+
+
+
+push("origin");
