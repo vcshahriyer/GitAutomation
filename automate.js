@@ -104,8 +104,8 @@ const branch = () => {
       "Type in the name of the branch you want to make: ",
       (answer) => {
         run(`checkout -b ${answer}`);
-        read.close();
         resolve(answer)
+        read.close();
       }
     );
   });
@@ -190,3 +190,4 @@ const justNewBranchPushPR = async (remote) => {
 
 
 justNewBranchPushPR('origin');
+// pruneLocal(false, 'origin')
