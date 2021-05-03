@@ -103,8 +103,9 @@ const branch = () => {
     read.question(
       "Type in the name of the branch you want to make: ",
       (answer) => {
-        run(`checkout -b ${answer}`);
-        resolve(answer)
+        if(run(`checkout -b ${answer}`)){
+          resolve(answer)
+        }
         read.close();
       }
     );
