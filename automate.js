@@ -93,24 +93,8 @@ const commit = (message) => {
   }
 };
 
-const branch = () => {
-  return new Promise((resolve, reject) => {
-    let b_name = '';
-    const read = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-
-    read.question(
-      "Type in the name of the branch you want to make: ",
-      (answer) => {
-        run(`checkout -b ${answer}`)
-        b_name = answer;
-        read.close();
-      }
-    );
-    resolve(b_name)
-  });
+const branch = (name) => {
+    run(`checkout -b ${name}`);
 };
 
 const fetch = (remote) => {
@@ -179,11 +163,27 @@ const sync = (remote) => {
     fetch(remote)
     pull(remote)
 }
+const readBranchNameFromUser = () => {
+  return new Promise((resolve, reject) => {
+    const read = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
 
+    read.question(
+      "Type in the name of the branch you want to make: ",
+      (answer) => {
+        resolve(answer);
+        read.close();
+      }
+    );
+  });
+}
 const justNewBranchPushPR = async (remote) => {
     const {userName, repoName} = await gitRemoteInfo()
-    const b_name = await branch()
+    const b_name = await readBranchNameFromUser()
     url = `https://github.com/${userName}/${repoName}/pull/new/${b_name}`
+    branch(b_name)
     push(remote, b_name)
     open(url)
 }
