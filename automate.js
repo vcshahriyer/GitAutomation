@@ -1,45 +1,33 @@
-const { exec } = require("child_process");
+const { exec, execSync } = require("child_process");
 const readline = require("readline");
+var readlineSync = require('readline-sync');
 const open = require("open")
 // Default variables
 const _remote = "origin";
 
 const run = (arg) => {
-  return exec(`git ${arg}`, (error, stdout, stderr) => {
-    if (error) {
-      console.log(`error: ${error.message}`);
-      return;
-    }
-    if (stderr) {
-      console.log(`stderr: ${stderr}`);
-      return;
-    }
-    //console.log(`stdout: ${stdout}`);
-  });
+  try {
+    return execSync(`git ${arg}`);
+  } catch(err){
+    return err;
+  }
 };
 
 const gitRemoteInfo = () => {
-  return new Promise((resolve, reject) => {
     const cmd = run("remote -v");
-    cmd.stdout.on("data", (output) => {
-      const parse = output.split(" ");
-      const match = /com[:\/](.+).git$/g.exec(parse[0]);
-      const [userName, repoName] = match[1].split("/");
-      resolve({ userName, repoName });
-    });
-  });
+    const output = cmd.toString(); 
+    const parse = output.split(" ");
+    const match = /com[:\/](.+).git$/g.exec(parse[0]);
+    const [userName, repoName] = match[1].split("/");
+    return ({ userName, repoName });
 };
 
 const getActiveBranchName = () => {
-  return new Promise((resolve, reject) => {
     const cmd = run("branch");
-    cmd.stdout.on("data", (output) => {
-      const parse = output.split(" ");
-      const indx = parse.indexOf("*");
-      const branch = parse[indx + 1];
-      resolve(branch.trim());
-    });
-  });
+    const output = cmd.toString();
+    const parse = /(\*)([\s\w]+)/g.exec(output);
+    const branch = parse[2];
+    return (branch.trim());
 };
 
 const getAllLocalBranchName = () => {
@@ -94,7 +82,7 @@ const commit = (message) => {
 };
 
 const branch = (name) => {
-    run(`checkout -b ${name}`);
+   return run(`checkout -b ${name}`);
 };
 
 const fetch = (remote) => {
@@ -113,9 +101,9 @@ const pull = (remote, b_name=null) => {
 
 const push = (remote, b_name=null) => {
   if(!b_name) {
-    getActiveBranchName().then(branchName=>{
+    const branchName = getActiveBranchName();
     run(`push -u ${remote} ${branchName}`);
-  })}else{
+  }else{
     run(`push -u ${remote} ${b_name}`);
   }
   
@@ -163,33 +151,23 @@ const sync = (remote) => {
     fetch(remote)
     pull(remote)
 }
-const readBranchNameFromUser = () => {
-  return new Promise((resolve, reject) => {
-    const read = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-
-    read.question(
-      "Type in the name of the branch you want to make: ",
-      (answer) => {
-        resolve(answer);
-        read.close();
-      }
-    );
-  });
-}
-const justNewBranchPushPR = async (remote) => {
-    const {userName, repoName} = await gitRemoteInfo()
-    const b_name = await readBranchNameFromUser()
+const justNewBranchPushPR = (remote) => {
+    const {userName, repoName} = gitRemoteInfo()
+    const b_name = readlineSync.question('Type in the name of the branch you want to make: ');
     url = `https://github.com/${userName}/${repoName}/pull/new/${b_name}`
+    console.log(url);
     branch(b_name)
     push(remote, b_name)
-    open(url)
+    // const branch = run(`checkout -b ${b_name}`)
+    // branch.stdout.on("data", (bout)=> {
+    //   console.log(bout)
+    //   const push = run(`push -u ${remote} ${b_name}`)
+    //     push.stdout.on("data", (pout)=>{
+    //       open(url)
+    //     })
+    // })
 }
 
-
-
-
-justNewBranchPushPR('origin');
-// pruneLocal(false, 'origin')
+// push('origin')
+// justNewBranchPushPR('origin');
+pruneLocal(false, 'origin')
