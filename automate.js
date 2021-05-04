@@ -158,16 +158,9 @@ const justNewBranchPushPR = (remote) => {
     console.log(url);
     branch(b_name)
     push(remote, b_name)
-    // const branch = run(`checkout -b ${b_name}`)
-    // branch.stdout.on("data", (bout)=> {
-    //   console.log(bout)
-    //   const push = run(`push -u ${remote} ${b_name}`)
-    //     push.stdout.on("data", (pout)=>{
-    //       open(url)
-    //     })
-    // })
+    open(url)
 }
 
 // push('origin')
-// justNewBranchPushPR('origin');
-pruneLocal(false, 'origin')
+justNewBranchPushPR('origin');
+// pruneLocal(false, 'origin')
