@@ -31,36 +31,30 @@ const getActiveBranchName = () => {
 };
 
 const getAllLocalBranchName = () => {
-  return new Promise((resolve, reject) => {
     const cmd = run("branch");
-    cmd.stdout.on("data", (output) => {
-      const parse = output.split(" ");
-      const branches = [];
-      for (item of parse) {
-        if (item === "*" || item === "") {
-          continue;
-        }
-        branches.push(item.trim());
+    const output = cmd.toString();
+    const parse = output.split(" ");
+    const branches = [];
+    for (item of parse) {
+      if (item === "*" || item === "") {
+        continue;
       }
-      resolve(branches);
-    });
-  });
+      branches.push(item.trim());
+    }
+    return branches;
 };
 
 const getAllRemoteBranchName = (remote) => {
-  return new Promise((resolve, reject) => {
     const cmd = run("branch -r");
-    cmd.stdout.on("data", (output) => {
-      const parse = output.split(" ");
-      let remoteBranches = [];
-      for (item of parse) {
-        if (item.includes(`${remote}/`) && !item.includes("HEAD")) {
-          remoteBranches.push(item.split("/")[1].trim());
-        }
+    const output = cmd.toString();
+    const parse = output.split(" ");
+    let remoteBranches = [];
+    for (item of parse) {
+      if (item.includes(`${remote}/`) && !item.includes("HEAD")) {
+        remoteBranches.push(item.split("/")[1].trim());
       }
-      resolve(remoteBranches);
-    });
-  });
+    }
+    return remoteBranches;
 };
 
 const add = () => {
@@ -69,15 +63,10 @@ const add = () => {
 
 const commit = (message) => {
   if (!message) {
-    const read = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-
-    read.question("Type in your commit message: ", (answer) => {
-      run(`commit -am "${answer}"`);
-      read.close();
-    });
+    const answer = readlineSync.question('Type in your commit message: ');
+    run(`commit -am "${answer}"`);
+  }else{
+    run(`commit -am "${message}"`);
   }
 };
 
@@ -91,9 +80,9 @@ const fetch = (remote) => {
 
 const pull = (remote, b_name=null) => {
   if(!b_name) {
-    getActiveBranchName().then(branchName=>{
+    const branchName = getActiveBranchName();
     run(`pull ${remote} ${branchName}`);
-  })}else{
+  }else{
     run(`pull ${remote} ${b_name}`);
   }
   
@@ -117,34 +106,34 @@ const deleteBranch = (b_name, force) => {
         run(`branch -d ${b_name}`)
 }
 
-const pruneRemote = async (force=false, remote) =>{
-    // fetch(remote)
-    localBranches = await getAllLocalBranchName()
+// const pruneRemote = async (force=false, remote) =>{
+//     // fetch(remote)
+//     localBranches = await getAllLocalBranchName()
 
-    const cmd = run(`remote prune ${remote}`);
-    cmd.stdout.on("data", (output) => {
-      const parse = output.split(" ");
-      for (pruned of parse) {
-        if (pruned.includes(`${remote}/`)) {
-          const {origin, branch} = pruned.split("/")
-          if(localBranches.includes(branch))
-            console.log(branch)
-        }
-      }
-    });
-}
+//     const cmd = run(`remote prune ${remote}`);
+//     cmd.stdout.on("data", (output) => {
+//       const parse = output.split(" ");
+//       for (pruned of parse) {
+//         if (pruned.includes(`${remote}/`)) {
+//           const {origin, branch} = pruned.split("/")
+//           if(localBranches.includes(branch))
+//             console.log(branch)
+//         }
+//       }
+//     });
+// }
+
 const pruneLocal = async (force=false, remote) =>{
     fetch(remote)
-    localBranches = await getAllLocalBranchName()
+    localBranches = getAllLocalBranchName()
     run(`remote prune ${remote}`)
-    remoteBranches = await getAllRemoteBranchName(remote)
-
-      for (br of localBranches) {
-        if (!remoteBranches.includes(br)) {
-            console.log(`Deleted Branch: ${br}`)
-            deleteBranch(br)
-        }
+    remoteBranches = getAllRemoteBranchName(remote)
+    for (br of localBranches) {
+      if (!remoteBranches.includes(br)) {
+          console.log(`Deleted Branch: ${br}`)
+          deleteBranch(br)
       }
+    }
 }
 
 const sync = (remote) => {
@@ -155,12 +144,22 @@ const justNewBranchPushPR = (remote) => {
     const {userName, repoName} = gitRemoteInfo()
     const b_name = readlineSync.question('Type in the name of the branch you want to make: ');
     url = `https://github.com/${userName}/${repoName}/pull/new/${b_name}`
-    console.log(url);
     branch(b_name)
     push(remote, b_name)
     open(url)
 }
-
+const newBranchPushPR = (remote) => {
+    
+    const b_name = readlineSync.question('Type in the name of the branch you want to make: ');
+    const {userName, repoName} = gitRemoteInfo()
+    url = `https://github.com/${userName}/${repoName}/pull/new/${b_name}`
+    add()
+    commit()
+    branch(b_name)
+    push(remote, b_name)
+    open(url)
+}
 // push('origin')
-justNewBranchPushPR('origin');
+// justNewBranchPushPR('origin');
 // pruneLocal(false, 'origin')
+newBranchPushPR('origin')
