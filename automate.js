@@ -190,4 +190,4 @@ const normalPush = (remote, b_name=null) => {
 // pruneLocal(false, 'origin')
 // newBranchPushPR('origin')
 // normalPushPR("origin")
-justPullRequest ("origin")
+normalPush("origin")
