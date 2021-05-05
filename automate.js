@@ -167,6 +167,7 @@ const normalPushPR = (remote) => {
     commit()
     push(remote, b_name)
     if (b_name !== "master" || b_name !== "main"){
+      console.log(b_name)
       open(url)
     }
 }
