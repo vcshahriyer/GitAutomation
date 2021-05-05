@@ -25,7 +25,7 @@ const gitRemoteInfo = () => {
 const getActiveBranchName = () => {
     const cmd = run("branch");
     const output = cmd.toString();
-    const parse = /(\*)([\s\w]+)/g.exec(output);
+    const parse = /(\*)( [\w]+)/g.exec(output);
     const branch = parse[2];
     return (branch.trim());
 };
@@ -167,7 +167,6 @@ const normalPushPR = (remote) => {
     commit()
     push(remote, b_name)
     if (b_name !== "master" || b_name !== "main"){
-      console.log(b_name)
       open(url)
     }
 }
