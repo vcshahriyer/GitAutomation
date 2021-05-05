@@ -170,8 +170,19 @@ const normalPushPR = (remote) => {
       open(url)
     }
 }
+const justPullRequest = (remote) => {
+    b_name = getActiveBranchName()
+    const {userName, repoName} = gitRemoteInfo()
+    url = `https://github.com/${userName}/${repoName}/pull/new/${b_name}`
+    push(remote, b_name)
+    if (b_name !== "master" || b_name !== "main"){
+      open(url)
+    }
+
+}
 // push('origin')
 // justNewBranchPushPR('origin');
 // pruneLocal(false, 'origin')
 // newBranchPushPR('origin')
-normalPushPR("origin")
+// normalPushPR("origin")
+justPullRequest ("origin")
