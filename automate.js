@@ -180,6 +180,11 @@ const justPullRequest = (remote) => {
     }
 
 }
+const normalPush = (remote, b_name=null) => {
+    add()
+    commit()
+    push(remote, b_name)
+}
 // push('origin')
 // justNewBranchPushPR('origin');
 // pruneLocal(false, 'origin')
